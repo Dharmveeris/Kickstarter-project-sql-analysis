@@ -8,8 +8,8 @@ A SQL analysis of 374,853 Kickstarter projects : which projects succeed, how suc
 - **Overall success rate is 40.4%** (133,851 of 331,462 projects with a known outcome).
 - **Dance has the highest category success rate (65.4%)**, but it holds only about 1% of projects. The largest categories are Film & Video (17% of projects, 41.8% success) and Music (13.8% of projects, 52.6% success).
 - **Goal size has the widest spread:** success falls steadily from 56.0% for goals up to $500 to 7.5% for goals above $100K.
-- **Campaigns longer than 45 days do worst in both eras** having the lowest success rate in both eras.
-- **Success rates fell sharply in 2014:** from about 47% in 2013 to 36% in 2014 and 32% in 2015, then partly recovered.
+ **Campaigns longer than 45 days do worst in both eras** having the lowest success rate in both eras.
+ **Success rates fell sharply in 2014:** from about 47% in 2013 to 36% in 2014 and 32% in 2015, then partly recovered.
 - **The July 2014 drop was broad:** success fell in 14 of 15 categories, and the share of projects that received no pledges at all jumped from 8.2% to 23.1% in a single month.
 - **Among the largest segments, US Music projects with 31–45 day campaigns and $1K–$5K goals did best (63.1%).**
 
@@ -99,8 +99,8 @@ From kickstarter_projects two views were created: clean_kickstarter_projects and
 
 | Observation | Finding | Analytical Decision |
 |---|---|---|
-| Zero-pledged projects | 51,810 (13.8% of all projects) | Retained; treated as failures where the project state is `Failed` |
-| Zero funding goals | 4 projects | Retained; excluded from goal-completion analysis using `Goal > 1000` |
+| Zero pledged projects | 51,810 (13.8% of all projects) | Retained; treated as failures where the project state is `Failed` |
+| Zero funding goals | 4 projects | Retained; excluded from goal completion analysis using `Goal > 1000` |
 | Inconsistent records | 15 records across three checks (e.g. failed projects with pledges at or above their goals) | Retained; `State` treated as the source of truth |
 | Campaigns exceeding 60 days | 4,824 resolved projects; 4,694 launched before the 2011 rule change and 130 after | Retained and analysed separately by era |
 
@@ -110,7 +110,7 @@ From kickstarter_projects two views were created: clean_kickstarter_projects and
 
 | Column / Issue | Finding | Action |
 |---|---|---|
-| `Launched` and `Deadline` | Stored as `DATETIME2` | Converted to `DATE` for date-level analysis |
+| `Launched` and `Deadline` | Stored as `DATETIME2` | Converted to `DATE` for date level analysis |
 | `Goal` and `Pledged` | Stored as `INT`; calculations can exceed the `INT` limit | Cast to `BIGINT` before performing calculations |
 
 ### Dataset Limitations and Analytical Assumptions
@@ -119,7 +119,7 @@ From kickstarter_projects two views were created: clean_kickstarter_projects and
 
 | Limitation | Finding | Analytical Decision |
 |---|---|---|
-| Partial periods | 2009 starts on 21 April; 2018 contains only two days and no resolved projects | 2009 treated as a partial year; 2018 excluded from annual success-rate comparisons |
+| Partial periods | 2009 starts on 21 April; 2018 contains only two days and no resolved projects | 2009 treated as a partial year; 2018 excluded from annual success rate comparisons |
 | Immature data | November–December 2017 contain mostly unresolved projects | Late 2017 flagged as immature |
 | Unresolved projects | Canceled: 38,751; Live: 2,798; Suspended: 1,842 | Success rates calculated using only Successful and Failed projects (331,462). All records retained in the base view |
 | Currency | Currency documentation unavailable | Values assumed to be USD; median goals by country fall between $3K and $15K, which is inconsistent with unconverted local currencies.|
@@ -160,7 +160,7 @@ Yearly rate was in 46 - 51% range for 2009-2013 then we observe a sharp dip in 2
 
 **Answer**: Success on Kickstarter means reaching the funding goal, not earning a return, so the data can
 only show which projects had better odds of being funded. It cannot guarantee any outcome. The projects
-with the best odds had goals under about $5,000, short (0-15 days) or mid-length (31-45 days) campaigns,
+with the best odds had goals under about $5,000, short (0-15 days) or mid length (31-45 days) campaigns,
 and categories like Music.
 
 | Factor | What the data shows | Share of projects |
@@ -210,7 +210,7 @@ The shortest campaigns did the best in both eras, 46 or more days campaigns perf
 - United States make majority of projects 78%, United Kingdom 8.9% and Canada 3.9% together these three make 91% of total projects.
 
 ### C. Pledging behaviour : how much money do projects attract?
-Beyond success rate looking at money trail. Technology receives highest per backer $129 against comic having $49. Games, Design, and Technology make only about a quarter of resolved projects and have 64% of total money. Failed projects in Journalism, Art and Film & Video raised roughly 1% of asked money, and across all projects the pledged-to-goal-ratio fell from 45% in 2013 to 14% in 2015.
+Beyond success rate looking at money trail. Technology receives highest per backer $129 against comic having $49. Games, Design, and Technology make only about a quarter of resolved projects and have 64% of total money. Failed projects in Journalism, Art and Film & Video raised roughly 1% of asked money, and across all projects the pledged to goal ratio fell from 45% in 2013 to 14% in 2015.
 
 
 ### D. Investigating 2014 decline
@@ -271,7 +271,7 @@ Kickstarter-project-sql-analysis/
 ## Credits
 
 - Dataset: Maven Analytics, Kickstarter Projects.
-- Campaign-length rule: Kickstarter blog post, ["Shortening the Maximum Project Length"](https://www.kickstarter.com/blog/shortening-the-maximum-project-length).
+- Campaign length rule: Kickstarter blog post, ["Shortening the Maximum Project Length"](https://www.kickstarter.com/blog/shortening-the-maximum-project-length).
 
 ## About me 
 I'm Dharmveer, a BSc Zoology graduate moving into data analysis. This is my first portfolio project, built with SQL Server and Power BI. I'm interested in turning messy data into clear answers, and I'm looking for entry level data analyst opportunities.  
