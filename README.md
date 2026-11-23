@@ -186,7 +186,7 @@ All queries for this section are in [04_extra_exploration.sql](sql/04_extra_expl
 ### A. Campaign Duration & Success  
 **Question** : How does campaign length affect success rate.  
 
-Across all projects, campaign of 60+ days succeeded more often (38.7%) than 46-60 days (27.4%), which seems reversed. Kickstarter initially allowed for campaign to run up to 90 days. It was changed to 60 days on 17 June 2011 [[link](https://www.kickstarter.com/blog/shortening-the-maximum-project-length)]. There are 4824 projects with 60+ campaign days, 4694 projects are before rule, comparing campaign range across complete time period fails to consider this. I divided data into two eras, before and after rule to compare success rate.  
+Across all projects, campaign of 60+ days succeeded more often (38.7%) than 46-60 days (27.4%), which seems reversed. Kickstarter initially allowed for campaign to run up to 90 days. It was changed to 60 days on 17 June 2011 [[Read more here](https://www.kickstarter.com/blog/shortening-the-maximum-project-length)]. There are 4824 projects with 60+ campaign days, 4694 projects are before rule, comparing campaign range across complete time period fails to consider this. I divided data into two eras, before and after rule to compare success rate.  
 
 |Campaign length|	Before rule(%)	|	After rule(%)   |
 |---|---|---|
@@ -262,10 +262,10 @@ kickstarter-projects-sql-analysis/
 
 ## How to reproduce
 
-1. Download the dataset from Maven Analytics ([link](https://mavenanalytics.io/data-playground/kickstarter-projects)). The data file is not included in this repository.
+1. Download the dataset from Maven Analytics ([kickstarter dataset](https://mavenanalytics.io/data-playground/kickstarter-projects)). The data file is not included in this repository.
 2. Import it into SQL Server as a table named `kickstarter_projects` (SSMS flat file import).
 3. Run the sql files in the numbered order.
-[01](sql/01_data_audit.sql) file helps you go through data quality checks, [02](sql/02_views.sql) helps you create analysis ready clean tables, [03](sql/03_stakeholder_questions.sql) and [04](sql/04_extra_exploration.sql) helps you recreate the said analysis.
+[01](sql/01_data_audit.sql) file helps you go through data quality checks, [02](sql/02_creating_views.sql) helps you create analysis ready clean tables, [03](sql/03_stakeholder_questions.sql) and [04](sql/04_extra_exploration.sql) helps you recreate the said analysis.
 
 ## Credits
 
