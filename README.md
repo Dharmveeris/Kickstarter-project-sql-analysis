@@ -245,13 +245,14 @@ Not established :
 
 ## Repository structure
 ```
-kickstarter-projects-sql-analysis/
+Kickstarter-project-sql-analysis/
 ├── README.md
 ├── LICENSE
-├── 01_data_audit.sql              data quality checks and decisions
-├── 02_views.sql                   cleaned view and resolved-projects view
-├── 03_stakeholder_questions.sql   the four business questions
-├── 04_extra_exploration.sql       campaign length, geography, pledging behaviour and the 2014 decline
+├── sql/
+│   ├── 01_data_audit.sql              data quality checks and decisions
+│   ├── 02_creating_views.sql          cleaned view and resolved-projects view
+│   ├── 03_stakeholder_questions.sql   the four business questions
+│   └── 04_extra_exploration.sql       campaign length, geography, pledging behaviour and the 2014 decline
 └── charts/
     ├── 01_yearly_success_rate.jpg
     ├── 02_monthly_2014_volume_vs_success.jpg
