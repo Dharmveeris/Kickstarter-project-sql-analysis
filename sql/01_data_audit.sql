@@ -202,20 +202,20 @@ SELECT
 	SUM(CASE WHEN Pledged = 0 THEN 1 ELSE 0 END) AS Zero_pledged,
 	SUM(CASE WHEN Backers = 0 THEN 1 ELSE 0 END) AS Zero_backers,
 	SUM(CASE WHEN Pledged != 0 AND Backers = 0 THEN 1 ELSE 0 END) AS pledged_without_backers,
-	SUM(CASE WHEN Pledged >= Goal AND State = 'Failed' THEN 1 ELSE 0 END) AS succesful_yet_failed,
-	SUM(CASE WHEN Pledged < Goal AND State = 'Successful' THEN 1 ELSE 0 END) AS failed_yet_succesful
+	SUM(CASE WHEN Pledged >= Goal AND State = 'Failed' THEN 1 ELSE 0 END) AS successful_yet_failed,
+	SUM(CASE WHEN Pledged < Goal AND State = 'Successful' THEN 1 ELSE 0 END) AS failed_yet_successful
 FROM kickstarter_projects
 -- No negative values in goal, pledged or backers.
 -- Zero pledged projects are 51810 and projects with zero backers are 51804.
 	-- There are 9 backers who didn't pledge at all
 -- There are 4 goals with zero.
 -- Inconsistency exists. There exists data where we have pledged_without_backers,
-	-- succesful_yet_failed, failed_yet_succesful however it's negligible. 
+	-- successful_yet_failed, failed_yet_successful however it's negligible. 
 
 
 -- Inconsistent data 
 SELECT
-	CASE WHEN Pledged >= Goal AND State = 'Failed' THEN 'succesful_yet_failed' END AS problem,
+	CASE WHEN Pledged >= Goal AND State = 'Failed' THEN 'successful_yet_failed' END AS problem,
 	Goal,
 	Pledged,
 	Backers,
@@ -223,12 +223,12 @@ SELECT
 FROM kickstarter_projects
 WHERE 
 	Pledged >= Goal AND State = 'Failed' 
--- succesful_yet_failed - 10
+-- successful_yet_failed - 10
 
 UNION ALL
 
 SELECT
-	CASE WHEN Pledged < Goal AND State = 'Successful' THEN 'failed_yet_succesful' END AS problem,
+	CASE WHEN Pledged < Goal AND State = 'Successful' THEN 'failed_yet_successful' END AS problem,
 	Goal,
 	Pledged,
 	Backers,
@@ -236,7 +236,7 @@ SELECT
 FROM kickstarter_projects
 WHERE 
 	Pledged < Goal AND State = 'Successful' 
--- failed_yet_succesful - 2
+-- failed_yet_successful - 2
 
 UNION ALL
 
