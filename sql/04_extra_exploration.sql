@@ -12,7 +12,7 @@ Script purpose: This script aims to enrich our understanding of the data by aski
 					- D1. Monthly performance in 2014 
 					- D2. July 2013 vs July 2014: Category comparison
 					- D3. Investigating zero-pledged projects
-						- D3.1 Historical anuual zero pledged rate(2009-2017)
+						- D3.1 Historical annual zero pledged rate(2009-2017)
 						- D3.2 Monthly zero pledged rate in 2014.
 
 This script uses clean_kickstarter_projects and clean_kickstarter_projects_resolved view
