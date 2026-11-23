@@ -340,6 +340,7 @@ Interpretation:
 	- Games, Design, and Technology constitute only about a quarter of projects but hold 64% of total funding.
 
 Limitations:
+	- Succes rate decline and zero pledged rate increase is an association not causation.
 	- Ratios are dollar weighted, where few projects can dominate the category.
 	- Per backer and amount_share considers only successful projects.
 */
