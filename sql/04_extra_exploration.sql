@@ -335,12 +335,10 @@ Findings:
 Interpretation:
 	- Success rate and money do not move together, Dance has the highest success rate but has only 0.4%
 		of money share, while Games(22.38%), Design(21.86%) and Technology(19.65%) have 65% of money share.
-	- 2014 and 2015 decline follows up with pledged rate, suggests the successrate drop might be 
-		connected to not enough funding in those years
+	- Pledged-to-goal fell in the same years, which restates the decline and does not explain it.
 	- Games, Design, and Technology constitute only about a quarter of projects but hold 64% of total funding.
 
 Limitations:
-	- Succes rate decline and zero pledged rate increase is an association not causation.
 	- Ratios are dollar weighted, where few projects can dominate the category.
 	- Per backer and amount_share considers only successful projects.
 */
