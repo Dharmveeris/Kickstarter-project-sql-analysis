@@ -13,6 +13,11 @@ A SQL analysis of 374,853 Kickstarter projects : which projects succeed, how suc
 - **The July 2014 drop was broad:** success fell in 14 of 15 categories, and the share of projects that received no pledges at all jumped from 8.2% to 23.1% in a single month.
 - **Among the largest segments, US Music projects with 31–45 day campaigns and $1K–$5K goals did best (63.1%).**
 
+![Line chart of Kickstarter success rate by year, 2009-2017](charts/01_yearly_success_rate.jpg)  
+*2009 starts in April, and late-2017 projects are not all resolved yet.*
+
+![Combo chart of 2014 monthly project count and success rate](charts/02_monthly_2014_volume_vs_success.jpg)  
+*In July 2014 the number of projects doubled and the success rate fell from 39% to 24%.*
 
 ---
 
@@ -44,13 +49,13 @@ A SQL analysis of 374,853 Kickstarter projects : which projects succeed, how suc
 ## Workflow
 The sequence goes in order:
 
-1. **Data Audit** : Finding inconsistencies (NULL values, duplicates, extra spaces etc) in the dataset and suggesting appropriate action.
-2. **Creating views** : Creating views for cleaned data and enriching it with derived columns.  
+1. **Data Audit** ([01_data_audit.sql](sql/01_data_audit.sql)): Finding inconsistencies (NULL values, duplicates, extra spaces etc) in the dataset and suggesting appropriate action.
+2. **Creating views** ([02_creating_views.sql](sql/02_creating_views.sql)): Creating views for cleaned data and enriching it with derived columns.  
  
     Data preparation and Decisions table to explain what and why changes were made 
 
-3. **Business questions** : Answering the four questions suggested by the dataset’s source.
-4. **Extra exploration** : Curiosity and ad-hoc questions analysis.
+3. **Business questions** ([03_stakeholder_questions.sql](sql/03_stakeholder_questions.sql)): Answering the four questions suggested by the dataset’s source.
+4. **Extra exploration** ([04_extra_exploration.sql](sql/04_extra_exploration.sql)): Curiosity and ad-hoc questions analysis.
 
 ## Data audit
 Checked : Nulls, Duplicates, Extra spaces, Distinct country, category, subcategory and state values, Earliest and last date for dataset, Inconsistency in data logic (such as successful_yet_failed projects)
@@ -121,7 +126,7 @@ From kickstarter_projects two views were created: clean_kickstarter_projects and
 
 ---
 ## Business questions
-Here business questions suggested by data's source are answered. This is brief questions wise summary for detailed findings and queries see [03 file].
+Here business questions suggested by data's source are answered. This is brief questions wise summary for detailed findings and queries see ([03_stakeholder_questions.sql](sql/03_stakeholder_questions.sql)).
 
 Success rate = Successful/(successful + failed)
 
@@ -166,13 +171,17 @@ and categories like Music.
 | Country | US 41.8%, UK 41.0%: little difference | US 79%, UK 9% |
 | Best segment compared | US Music, 31–45 days, $1K–5K goal: 63.1% (2,752 of 4,364) | n/a |
 
+![Bar chart of success rate by funding goal range](charts/03_success_by_goal_range.jpg)  
+*Success falls from 56% for goals up to $500 to 7.5% above $100K. This is an association, not a controlled result.*
+
 Goal size has the widest spread: success fell from 56% for goals up to $500 to 7.5% above $100K. The shortest campaigns (0-15 days) did best but are rare (5% of projects). Campaigns of 16-30 and 31-45 days make up about 81% of projects, and 31-45 days did better (46.4% vs 40.1%). Country mattered little. Music pairs a high success rate (52.6%) with a large share of projects (13.8%), while Dance, Theater and Comics have higher rates but hold only 1-3% of projects each.
 
-These are associations in past projects. Creators choose their own goals and campaign lengths, and the 2014 decline shows that patterns can change. Details and queries:
+These are associations in past projects. Creators choose their own goals and campaign lengths, and the 2014 decline shows that patterns can change. For details and queries see ([03_stakeholder_questions.sql](sql/03_stakeholder_questions.sql))
 
 Note : US has 78% in total projects and and 79% in resolved projects.
 
 ## Extra exploration
+All queries for this section are in [04_extra_exploration.sql](sql/04_extra_exploration.sql).
 
 ### A. Campaign Duration & Success  
 **Question** : How does campaign length affect success rate.  
@@ -186,6 +195,9 @@ Across all projects, campaign of 60+ days succeeded more often (38.7%) than 46-6
 |	31-45		 |		54.92		|		45.68       |
 |	46-60		 |		46.79		|		25.55       |
 |	60+			 |		39.16		|		23.85 (130 projects)       |
+
+![Bar chart of campaign length success rate before and after the 2011 rule](charts/04_campaign_length_by_era.jpg)  
+*After the rule, only 130 projects ran longer than 60 days, too few to report a rate, so that bar is missing.*
 
 The shortest campaigns did the best in both eras, 46 or more days campaigns perform worst  
 
@@ -205,7 +217,10 @@ Beyond success rate looking at money trail. Technology receives highest per back
 
 **When** : In 2014 yearly success rate drops to 36% from 46-51% range of early years, zooming in monthly success rate of 2014 drops sharply in July, a 15.15 percentage point drop compared to June. See D1.    
 
-**Where** : 14 out of 15 categories success rate fell in July of 2014 as compared to  July of 2013. See D2.  
+**Where** : 14 out of 15 categories success rate fell in July of 2014 as compared to  July of 2013. See D2. 
+
+![Bar chart comparing July 2013 and July 2014 success rate by category](charts/05_july_2013_vs_2014_by_category.jpg)  
+*Some categories have small July counts, so their percentages are unstable.*
 
 **What changed**: 
 - No of projects increased to more than two times going June to July (4448 to 9303) in 2014.
@@ -247,15 +262,15 @@ kickstarter-projects-sql-analysis/
 
 ## How to reproduce
 
-1. Download the dataset from Maven Analytics ([add link]). The data file is not included in this repository.
+1. Download the dataset from Maven Analytics ([link](https://mavenanalytics.io/data-playground/kickstarter-projects)). The data file is not included in this repository.
 2. Import it into SQL Server as a table named `kickstarter_projects` (SSMS flat file import).
 3. Run the sql files in the numbered order.
-`01` file helps you go through data quality checks, `02` helps you create analysis ready clean tables, `03` and `04` helps you recreate the said analysis.
+[01](sql/01_data_audit.sql) file helps you go through data quality checks, [02](sql/02_views.sql) helps you create analysis ready clean tables, [03](sql/03_stakeholder_questions.sql) and [04](sql/04_extra_exploration.sql) helps you recreate the said analysis.
 
 ## Credits
 
 - Dataset: Maven Analytics, Kickstarter Projects.
-- Campaign-length rule: Kickstarter blog post, "Shortening the Maximum Project Length".
+- Campaign-length rule: Kickstarter blog post, ["Shortening the Maximum Project Length"](https://www.kickstarter.com/blog/shortening-the-maximum-project-length).
 
 ## About me 
 I'm Dharmveer, a BSc Zoology graduate moving into data analysis. This is my first portfolio project, built with SQL Server and Power BI. I'm interested in turning messy data into clear answers, and I'm looking for entry level data analyst opportunities.  
